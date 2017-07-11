@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+<head>
+  <title>Cafeholic in Seoul</title>
+  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+  <style>
+    html, body, #map { margin: 0; height: 100%; }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+  	<script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+  	<!-- NAVER MAP -->
+	<script src="../assets/proj4-compressed.js"></script>
+	<script src="../assets/proj4leaflet.js"></script>
+	<script src="../assets/Leaflet.KoreanTmsProviders.js"></script>
+	<!-- ICON -->
+	<link rel="stylesheet" href="http://code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css">
+	<link rel="stylesheet" href="../dist/leaflet.awesome-markers.css">
+	<script src="../dist/leaflet.awesome-markers.js"></script>
+  <script>
+		var map = L.map('map', {
+			crs: L.Proj.CRS.TMS.Naver,
+			continuousWorld: true,
+			worldCopyJump: false,
+			zoomControl: true
+		});
+		var baseLayers = {
+			'Naver Street Map': L.Proj.TileLayer.TMS.provider('NaverMap.Street', null, {opacity : 0.6}).addTo(map),
+			'Naver Satellite Map': L.Proj.TileLayer.TMS.provider('NaverMap.Satellite'),
+			'Naver Hybrid Map': L.Proj.TileLayer.TMS.provider('NaverMap.Hybrid'),
+			'Naver Cadastral Map': L.Proj.TileLayer.TMS.provider('NaverMap.Cadastral', null, {opacity : 1.0})
+			
+		};
+		
+		var redMarker = L.AwesomeMarkers.icon({
+    			icon: 'coffee',
+			 markerColor: 'red'
+		 });
+		 //L.marker([37.545800, 126.918315], {icon: redMarker}).addTo(map);
+		 L.marker([37.545800, 126.918315], {icon: L.AwesomeMarkers.icon({icon: 'ion-coffee', markerColor: 'red', prefix: 'fa', iconColor: 'black'}) }).addTo(map).bindPopup('<p><a href="http://onedayof.tistory.com/entry/%EC%83%81%EC%88%98%EC%B9%B4%ED%8E%98-ANTHRACITE-%EC%95%A4%ED%8A%B8%EB%9F%AC%EC%82%AC%EC%9D%B4%ED%8A%B8"><b>앤트러사이트</b></a><br>마포구 합정동</p>');
+		 //L.marker([51.5, -0.09], {icon: greenIcon}).addTo(map).bindPopup("I am a green leaf.");
+	         //var marker = L.marker([37.545800, 126.918315], {icon: redMarker}).addTo(map);
+		//marker.bindPopup("<b>앤트러사이트</b><br>마포구 합정동").openPopup();
+		//L.control.layers(baseLayers, overlayLayers, {collapsed: false}).addTo(map);
+		map.setView([37.529246,126.979916], 5);
+      
+      
+      // new L.Proj.TileLayer.TMS.Provider('NaverMap.Street').addTo(map);
+      // var map = L.map('map').setView([37.529246,126.979916], 12);
+      
+   		L.control.scale().addTo(map); 
+  </script>
+</body>
+</html>
